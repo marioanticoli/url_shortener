@@ -1,0 +1,23 @@
+{
+  "name": "url_shortener",
+  "version": "1.0.0",
+  "description": "## Intro",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marioanticoli/url_shortener.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marioanticoli/url_shortener/issues"
+  },
+  "homepage": "https://github.com/marioanticoli/url_shortener#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
