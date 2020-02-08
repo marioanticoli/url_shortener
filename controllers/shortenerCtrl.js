@@ -1,4 +1,5 @@
 const redis = require("redis");
+const EXPIRATION = 24 * 60 * 60; // 1 day in secs
 
 const client = redis.createClient({
   host: "redis",
@@ -20,7 +21,7 @@ const shorten = async (req, res) => {
         id = randomID(10);
         if ((await redisGet(id)) == null) {
           idUnique = true;
-          client.SET(id, orig_url);
+          client.SET(id, orig_url, "EX", EXPIRATION);
         }
       }
 
@@ -50,8 +51,13 @@ const shorten = async (req, res) => {
 const serve = async (req, res) => {
   const id = req.params.id;
   const orig_url = await redisGet(id);
-  console.log(orig_url);
-  res.redirect(301, orig_url);
+  if (orig_url == null) {
+    res.status(422).send({
+      message: "This url is invalid"
+    });
+  } else {
+    res.redirect(301, orig_url);
+  }
 };
 
 const randomID = l => {
