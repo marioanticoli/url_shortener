@@ -52,7 +52,7 @@ const serve = async (req, res) => {
   const id = req.params.id;
   const orig_url = await redisGet(id);
   if (orig_url == null) {
-    res.status(422).send({
+    res.status(404).send({
       message: "This url is invalid"
     });
   } else {
